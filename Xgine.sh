@@ -22,7 +22,7 @@ white="\e[0;97m"
 bold="\e[1m"
 uline="\e[4m"
 reset="\e[0m"
-seperator="........................................................"
+separator="........................................................"
 
 # Handle logger
 logger () {
@@ -37,13 +37,21 @@ logger () {
     fi
     echo -en "${reset}${!bgcolor}${bold}XGINE${reset}${expand_bg} "
     echo -en "${reset}${!format}"
+    addon="-e"
     if [[ $3 == "nobreak" ]]; then
         addon="-en"
+    elif [[ $3 == "bold" ]]; then
+        prefixx="${bold}"
+    elif [[ $3 == "uline" ]]; then
+        prefixx="${uline}"
     else
-        addon="-e"
+        prefixx=""
     fi
-    echo $addon "${prefix}${2}"
+    echo $addon "${prefixx}${2}"
     echo -en "${reset}"
+}
+separator () {
+    logger "" $separator
 }
 
 # Ctrl-c & Ctrl-z handler
@@ -79,11 +87,11 @@ helloworld () {
     XGINE_LINUX_DISTRO=$(cat /etc/*-release | awk '/^NAME=".*"$/' | cut -d '"' -f 2)
     XGINE_LINUX_DISTRO_VERSION=$(cat /etc/*-release | awk '/^VERSION_ID=".*"$/' | cut -d '"' -f 2)
     XGINE_TOTAL_MEMORY=$((($(awk '/MemTotal/ {print $2}' /proc/meminfo)/1024)))
-    logger "blue" "Distro: $XGINE_LINUX_DISTRO"
+    logger "blue" "Distro: $XGINE_LINUX_DISTRO" "bold"
     if [[ -n $XGINE_LINUX_DISTRO_VERSION ]]; then
-        logger "blue" "Release: $XGINE_LINUX_DISTRO_VERSION"
+        logger "blue" "Release: $XGINE_LINUX_DISTRO_VERSION" "bold"
     fi
-    logger "blue" "Total Ram: $XGINE_TOTAL_MEMORY MB"
+    logger "blue" "Total Ram: $XGINE_TOTAL_MEMORY MB" "bold"
 }
 
 # Check OS and requirements
@@ -113,7 +121,7 @@ requirements () {
 
 # OS based Package Installer
 yumInstall () {
-    logger "uline" "Installing requirements with yum:"
+    logger "blue" "Installing requirements with yum:" "uline"
     yum -q --color=auto install epel-release nginx mariadb-server http://rpms.remirepo.net/enterprise/remi-release-7.rpm yum-utils
     yum-config-manager --enable remi-php72 > /dev/null &
     yum -q --color=auto install php-fpm php-opcache php-cli php-gd php-curl php-mysql
@@ -123,7 +131,7 @@ dnfInstall () {
     logger "bold" "Denf Donf ?"
 }
 pacmanInstall () {
-    logger "uline" "Installing requirements with pacman:"
+    logger "blue" "Installing requirements with pacman:" "uline"
     pacman -Syu nginx mysql php php-fpm phpmyadmin -q --needed --noconfirm --color=auto
     logger "bold" "Pac Pac :D"
 }
@@ -132,13 +140,19 @@ notIupported () {
     logger "red" "Exiting the installer..."
 }
 
+# Outro
+endworld () {
+    logger "green" "Done :)" "bold"
+}
+
 # Main installation
 main () {
     clear
     helloworld
-    logger "" $seperator
+    separator
     requirements
-    logger "" $seperator
+    separator
+    endworld
 }
 
 main
