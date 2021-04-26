@@ -7,7 +7,7 @@
 #  |_|  |_|\__,_|_| |_|\__,_|\__, | |_|  |_|_|_|  /___\__,_|\__,_|\___|
 #                            |___/
 #
-# This file is a part of `github.com/mahdymirzade/xgin`.
+# This file is a part of `github.com/mahdymirzade/xgine`.
 #
 #
 # Coloring
@@ -35,7 +35,7 @@ logger () {
             format="reset"
         fi
     fi
-    echo -en "${reset}${!bgcolor}${bold}XGIN${reset}${expand_bg} "
+    echo -en "${reset}${!bgcolor}${bold}XGINE${reset}${expand_bg} "
     echo -en "${reset}${!format}"
     if [[ $3 == "nobreak" ]]; then
         addon="-en"
@@ -60,30 +60,30 @@ trap "" TSTP
 # Verify privileges
 if [[ $EUID -ne 0 ]]; then
     logger "red" "This script can't run without enough privileges."
-    logger "red" "Please run ${reset}${green}Xgin${reset}${red} as root user."
+    logger "red" "Please run ${reset}${green}Xgine${reset}${red} as root user."
     exit
 fi
 
 # Introduction
 helloworld () {
-    logger "green" "Xgin is a control panel for Nginx: (LNMP)"
-    logger "green" "https://github.com/mahdymirzade/xgin"
+    logger "green" "Xgine is a control panel for Nginx: (LNMP)"
+    logger "green" "https://github.com/mahdymirzade/xgine"
     logger "green" ""
     logger "green" "__  __     _"
-    logger "green" "\ \/ /__ _(_)_ __"
-    logger "green" " \  // _\` | | '_ \\"
-    logger "green" " /  \ (_| | | | | |"
-    logger "green" "/_/\_\__, |_|_| |_|"
+    logger "green" "\ \/ /__ _(_)_ __   ___"
+    logger "green" " \  // _\` | | '_ \ / _ \\"
+    logger "green" " /  \ (_| | | | | |  __/"
+    logger "green" "/_/\_\__, |_|_| |_|\___|"
     logger "green" "     |___/"
     logger "green" ""
-    XGIN_LINUX_DISTRO=$(cat /etc/*-release | awk '/^NAME=".*"$/' | cut -d '"' -f 2)
-    XGIN_LINUX_DISTRO_VERSION=$(cat /etc/*-release | awk '/^VERSION_ID=".*"$/' | cut -d '"' -f 2)
-    XGIN_TOTAL_MEMORY=$((($(awk '/MemTotal/ {print $2}' /proc/meminfo)/1024)))
-    logger "blue" "Distro: $XGIN_LINUX_DISTRO"
-    if [[ -n $XGIN_LINUX_DISTRO_VERSION ]]; then
-        logger "blue" "Release: $XGIN_LINUX_DISTRO_VERSION"
+    XGINE_LINUX_DISTRO=$(cat /etc/*-release | awk '/^NAME=".*"$/' | cut -d '"' -f 2)
+    XGINE_LINUX_DISTRO_VERSION=$(cat /etc/*-release | awk '/^VERSION_ID=".*"$/' | cut -d '"' -f 2)
+    XGINE_TOTAL_MEMORY=$((($(awk '/MemTotal/ {print $2}' /proc/meminfo)/1024)))
+    logger "blue" "Distro: $XGINE_LINUX_DISTRO"
+    if [[ -n $XGINE_LINUX_DISTRO_VERSION ]]; then
+        logger "blue" "Release: $XGINE_LINUX_DISTRO_VERSION"
     fi
-    logger "blue" "Total Ram: $XGIN_TOTAL_MEMORY MB"
+    logger "blue" "Total Ram: $XGINE_TOTAL_MEMORY MB"
 }
 
 # Check OS and requirements
@@ -95,8 +95,8 @@ requirements () {
         echo -n "....."
     done
     echo ""
-    if [[ $XGIN_LINUX_DISTRO == "CentOS Linux" ]]; then
-        VER=$XGIN_LINUX_DISTRO_VERSION
+    if [[ $XGINE_LINUX_DISTRO == "CentOS Linux" ]]; then
+        VER=$XGINE_LINUX_DISTRO_VERSION
         if [[ $VER -eq 7 ]]; then
             yumInstall
         elif [[ $VER -eq 8 ]]; then
@@ -104,7 +104,7 @@ requirements () {
         else
             notSupported
         fi
-    elif [[ $XGIN_LINUX_DISTRO == "Arch Linux" ]]; then
+    elif [[ $XGINE_LINUX_DISTRO == "Arch Linux" ]]; then
         pacmanInstall
     else
         notSupported
@@ -128,7 +128,7 @@ pacmanInstall () {
     logger "bold" "Pac Pac :D"
 }
 notIupported () {
-    logger "red" "Sorry! $XGIN_LINUX_DISTRO $XGIN_LINUX_DISTRO_VERSION IS NOT SUPPORTED."
+    logger "red" "Sorry! $XGINE_LINUX_DISTRO $XGINE_LINUX_DISTRO_VERSION IS NOT SUPPORTED."
     logger "red" "Exiting the installer..."
 }
 
