@@ -51,7 +51,11 @@ logger () {
     echo -en "${reset}"
 }
 separator () {
-    logger "" $separator
+    logger "" "." "nobreak"
+    for ((i = 0 ; i < 54 ; i++)); do
+        echo -n "."
+    done
+    echo "."
 }
 
 # Ctrl-c & Ctrl-z handler
