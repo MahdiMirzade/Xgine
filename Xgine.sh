@@ -157,6 +157,7 @@ pacmanInstall () {
 notIupported () {
     logger "red" "Sorry! $XGINE_LINUX_DISTRO $XGINE_LINUX_DISTRO_VERSION IS NOT SUPPORTED."
     logger "red" "Exiting the installer..."
+    exit 2
 }
 
 # Outro
