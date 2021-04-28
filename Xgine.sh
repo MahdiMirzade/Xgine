@@ -125,7 +125,7 @@ requirements () {
         systemctl enable $i
         systemctl start $i
     done
-    mysql_secure_installation
+    #mysql_secure_installation
 }
 
 # OS based Package Installer
