@@ -5,8 +5,8 @@
 Xgine is going to be an Nginx control panel.
 
 How the name was chosen?<br/>
-Nginx: <u>En</u>gin<u>e</u> + X<br/>
-Xgine: X + <u>En</u>gine
+Nginx: **En**gin**e** + X<br/>
+Xgine: X + **En**gine
 
 **As I said "IT'S GOING TO BE",<br/>
 now it's currently under developement,<br/>
