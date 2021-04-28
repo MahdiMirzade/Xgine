@@ -4,7 +4,13 @@
 
 Xgine is going to be an Nginx control panel.
 
-**As I said "IT'S GOING TO BE", now it's currently under developement, SO DON'T EVER USE THIS UNTIL 1.0 RELEASE.**
+How the name was chosen?<br/>
+Nginx: <u>En</u>gin<u>e</u> + X<br/>
+Xgine: X + <u>En</u>gine
+
+**As I said "IT'S GOING TO BE",<br/>
+now it's currently under developement,<br/>
+SO DON'T EVER USE THIS UNTIL 1.0 RELEASE.**
 
 ## Installation
 You can use these methods to install Xgine:
