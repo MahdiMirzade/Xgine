@@ -77,7 +77,7 @@ fi
 
 # Introduction
 helloworld () {
-    logger "green" "Xgine is a control panel for Nginx: (LNMP)"
+    logger "green" "Xgine is a control panel for Nginx: (LEMP)"
     logger "green" "https://github.com/mahdymirzade/xgine"
     logger "green" ""
     logger "green" "__  __     _"
