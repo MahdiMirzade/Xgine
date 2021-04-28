@@ -22,7 +22,6 @@ white="\e[0;97m"
 bold="\e[1m"
 uline="\e[4m"
 reset="\e[0m"
-separator="........................................................"
 
 # Handle logger
 logger () {
