@@ -1,15 +1,68 @@
 # Xgine
 
+> A stupid pet project for learning bash scripting and webservers, don't expect much.
+
 Xgine is going to be an Nginx control panel.
 
-**IT's going to, now it's currently under developement.**
+**As I said "IT'S GOING TO BE", now it's currently under developement, SO DON'T EVER USE THIS UNTIL 1.0 RELEASE.**
 
-> A stupid pet project for bash scripting learning.
+## Installation
+You can use these methods to install Xgine:
+- [Auto Install](#auto-install)
+- [Manual Install](#manual-install)
 
-## Auto Installation
+### Auto Install
+One-line install command:
 ```
 $ curl -L https://git.io/J3Jbz | bash
 ```
+
+### Manual Install
+**Step 1: Check requirements**<br/>
+This project is going to be available in:
+- CentOS 7
+- CentOS 8
+- Arch Linux (My PC is running arch so that makes sense right?)
+
+**Step 2: Continue installation based on your OS**<br/>
+Why is there different ways to push this off? Mainly because different distros have different ways of package installation, you'll see by just looking at the instructions.
+
+**CentOS 7: Yum Package Manager**
+```
+$ yum update
+$ yum install epel-release 
+$ yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+$ yum install yum-utils
+$ yum-config-manager --enable remi-php72 > /dev/null &
+$ yum install nginx mariadb-server php php-fpm php-opcache php-cli php-gd php-curl php-mysqli phpmyadmin
+```
+
+**CentOS 8: Dnf Package Manager**
+```
+$ dnf update
+$ dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+$ dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+$ dnf module enable php:remi-7.2
+$ dnf install nginx mariadb mariadb-server php php-fpm php-opcache php-cli php-gd php-curl php-mysqli phpmyadmin
+```
+
+**Arch Linux: Pacman Package Manager**
+```
+$ pacman -Syu nginx mysql mariadb php php-fpm phpmyadmin
+$ mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+```
+
+**Step 3: Install Xgine on your system**
+> Going to be something great
+
+**Step 4: Configure your softwares using Xgine**
+> Going to be something great
+
+**Step 5: You're Done**
+Now that you've finished you can take a moment to star this project :)
+
+Use Xgine the way it's intended:
+[Wiki - Soon](#)
 
 ## Donate
 <a href="https://raw.githubusercontent.com/mahdymirzade/mahdymirzade/main/assets/dotfiles/heart.gif"><img src="https://raw.githubusercontent.com/mahdymirzade/mahdymirzade/main/assets/dotfiles/lq/heart.gif" alt="Donation Gif" width="200" height="193" align="right"></a>
