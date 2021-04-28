@@ -120,22 +120,38 @@ requirements () {
     else
         notSupported
     fi
+    services=('mariadb' 'nginx' 'php-fpm')
+    for i in "${services[@]}"; do
+        systemctl enable $i
+        systemctl start $i
+    done
+    mysql_secure_installation
 }
 
 # OS based Package Installer
 yumInstall () {
     logger "blue" "Installing requirements with yum:" "uline"
-    yum -q --color=auto install epel-release nginx mariadb-server http://rpms.remirepo.net/enterprise/remi-release-7.rpm yum-utils
+    yum -q --color=auto update
+    yum -q --color=auto install epel-release 
+    yum -q --color=auto install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+    yum -q --color=auto install yum-utils
     yum-config-manager --enable remi-php72 > /dev/null &
-    yum -q --color=auto install php-fpm php-opcache php-cli php-gd php-curl php-mysql
+    yum -q --color=auto install nginx mariadb-server php php-fpm php-opcache php-cli php-gd php-curl php-mysqli phpmyadmin
     logger "bold" "Yum Yum :P"
 }
 dnfInstall () {
+    logger "blue" "Installing requirements with dnf:" "uline"
+    dnf -q --color=auto update
+    dnf -q --color=auto install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+    dnf -q --color=auto install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+    dnf module enable php:remi-7.2
+    dnf -q --color=auto install nginx mariadb mariadb-server php php-fpm php-opcache php-cli php-gd php-curl php-mysqli phpmyadmin
     logger "bold" "Denf Donf ?"
 }
 pacmanInstall () {
     logger "blue" "Installing requirements with pacman:" "uline"
-    pacman -Syu nginx mysql php php-fpm phpmyadmin -q --needed --noconfirm --color=auto
+    pacman -Syu nginx mysql mariadb php php-fpm phpmyadmin -q --needed --noconfirm --color=auto
+    mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
     logger "bold" "Pac Pac :D"
 }
 notIupported () {
