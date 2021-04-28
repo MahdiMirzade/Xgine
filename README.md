@@ -20,7 +20,7 @@ You can use these methods to install Xgine:
 ### Auto Install
 One-line install command:
 ```
-$ curl -L https://git.io/J3Jbz | bash
+$ curl -Ls https://git.io/J3Jbz | bash
 ```
 
 ### Manual Install
