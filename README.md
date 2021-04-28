@@ -18,13 +18,13 @@ $ curl -L https://git.io/J3Jbz | bash
 ```
 
 ### Manual Install
-**Step 1: Check requirements**<br/>
+#### Step 1: Check requirements
 This project is going to be available in:
 - CentOS 7
 - CentOS 8
 - Arch Linux (My PC is running arch so that makes sense right?)
 
-**Step 2: Continue installation based on your OS**<br/>
+#### Step 2: Continue installation based on your OS
 Why is there different ways to push this off? Mainly because different distros have different ways of package installation, you'll see by just looking at the instructions.
 
 **CentOS 7: Yum Package Manager**
@@ -52,14 +52,15 @@ $ pacman -Syu nginx mysql mariadb php php-fpm phpmyadmin
 $ mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 ```
 
-**Step 3: Install Xgine on your system**
+#### Step 3: Install Xgine on your system
 > Going to be something great
 
-**Step 4: Configure your softwares using Xgine**
+#### Step 4: Configure your softwares using Xgine
 > Going to be something great
 
-**Step 5: You're Done**
-Now that you've finished you can take a moment to star this project :)
+#### Step 5: You're Done
+Now that you've finished you can continue after a little rest.<br/>
+I highly suggest you to take a moment and star this project It's so fun to do :)
 
 Use Xgine the way it's intended:
 [Wiki - Soon](#)
