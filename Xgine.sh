@@ -128,7 +128,7 @@ requirements () {
     #mysql_secure_installation
 }
 
-# OS based Package Installer
+# Package Installer
 yumInstall () {
     logger "blue" "Installing requirements with yum:" "uline"
     yum -q --color=auto update
@@ -160,6 +160,22 @@ notIupported () {
     exit 2
 }
 
+# Backup old config
+backup () {
+    logger "blue" "Taking old configuration backup:" "uline"
+    startpath=$(pwd)
+    backuptime=$(date +'%F_%H-%M-%S')
+    pathtobackups=/opt/xgine/oldconfbackups/$backuptime
+    mkdir -p $pathtobackups
+    cd /etc/nginx
+    tar -czvf nginx.tar.gz *
+    mv nginx.tar.gz $pathtobackups
+    if [[ -e /etc/php-fpm.d/www.conf ]]; then
+        cat /etc/php-fpm.d/www.conf > php-fpm.www.conf
+    fi
+    cd $startpath
+}
+
 # Outro
 endworld () {
     logger "green" "Done :)" "bold"
@@ -171,6 +187,8 @@ main () {
     helloworld
     separator
     requirements
+    separator
+    backup
     separator
     endworld
 }
