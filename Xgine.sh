@@ -145,7 +145,11 @@ function dnfInstall () {
     dnf -q --color=auto -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
     dnf -q --color=auto -y install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
     dnf module enable php:remi-7.2
-    dnf -q --color=auto -y install nginx mariadb mariadb-server php php-fpm php-opcache php-cli php-gd php-curl php-mysqli phpmyadmin
+    dnf -q --color=auto -y install nginx mariadb mariadb-server php php-fpm php-opcache php-cli php-gd php-curl php-mysqli wget unzip
+    cd /opt
+    wget https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.zip
+    unzip phpMyAdmin-5.0.2-all-languages.zip
+    mv phpMyAdmin-5.0.2-all-languages /usr/share/phpmyadmin
     logger "bold" "Denf Donf ?"
 }
 function pacmanInstall () {
