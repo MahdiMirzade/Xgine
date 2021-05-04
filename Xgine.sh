@@ -24,7 +24,7 @@ uline="\e[4m"
 reset="\e[0m"
 
 # Handle logger
-logger () {
+function logger () {
     format=$1
     if [[ $format == "red" || $format == "blue" || $format == "green" ]]; then
         bgcolor="${format}_bg"
@@ -49,7 +49,7 @@ logger () {
     echo $addon "${prefixx}${2}"
     echo -en "${reset}"
 }
-separator () {
+function separator () {
     logger "" "." "nobreak"
     for ((i = 0 ; i < 54 ; i++)); do
         echo -n "."
@@ -58,7 +58,7 @@ separator () {
 }
 
 # Ctrl-c & Ctrl-z handler
-ctrlc () {
+function ctrlc () {
     logger "" ""
     logger "red" "You have done a [Ctrl-C], performing clean up..."
     killall -s KILL -q yum dnf pacman > /dev/null &
@@ -76,7 +76,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Introduction
-helloworld () {
+function helloworld () {
     logger "green" "Xgine is a control panel for Nginx: (LEMP)"
     logger "green" "https://github.com/mahdymirzade/xgine"
     logger "green" ""
@@ -98,7 +98,7 @@ helloworld () {
 }
 
 # Check OS and requirements
-requirements () {
+function requirements () {
     logger "bold" "Starting installer in 10 seconds... (Exit with [Ctrl+C])"
     logger "" "......" "nobreak"
     for ((i = 0 ; i < 10 ; i++)); do
@@ -129,39 +129,39 @@ requirements () {
 }
 
 # Package Installer
-yumInstall () {
+function yumInstall () {
     logger "blue" "Installing requirements with yum:" "uline"
-    yum -q --color=auto update
-    yum -q --color=auto install epel-release 
-    yum -q --color=auto install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
-    yum -q --color=auto install yum-utils
+    yum -q --color=auto -y update
+    yum -q --color=auto -y install epel-release 
+    yum -q --color=auto -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+    yum -q --color=auto -y install yum-utils
     yum-config-manager --enable remi-php72 > /dev/null &
-    yum -q --color=auto install nginx mariadb-server php php-fpm php-opcache php-cli php-gd php-curl php-mysqli phpmyadmin
+    yum -q --color=auto -y install nginx mariadb-server php php-fpm php-opcache php-cli php-gd php-curl php-mysqli phpmyadmin
     logger "bold" "Yum Yum :P"
 }
-dnfInstall () {
+function dnfInstall () {
     logger "blue" "Installing requirements with dnf:" "uline"
-    dnf -q --color=auto update
-    dnf -q --color=auto install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-    dnf -q --color=auto install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+    dnf -q --color=auto -y update
+    dnf -q --color=auto -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+    dnf -q --color=auto -y install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
     dnf module enable php:remi-7.2
-    dnf -q --color=auto install nginx mariadb mariadb-server php php-fpm php-opcache php-cli php-gd php-curl php-mysqli phpmyadmin
+    dnf -q --color=auto -y install nginx mariadb mariadb-server php php-fpm php-opcache php-cli php-gd php-curl php-mysqli phpmyadmin
     logger "bold" "Denf Donf ?"
 }
-pacmanInstall () {
+function pacmanInstall () {
     logger "blue" "Installing requirements with pacman:" "uline"
     pacman -Syu nginx mysql mariadb php php-fpm phpmyadmin -q --needed --noconfirm --color=auto
     mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
     logger "bold" "Pac Pac :D"
 }
-notIupported () {
+function notIupported () {
     logger "red" "Sorry! $XGINE_LINUX_DISTRO $XGINE_LINUX_DISTRO_VERSION IS NOT SUPPORTED."
     logger "red" "Exiting the installer..."
     exit 2
 }
 
 # Backup old config
-backup () {
+function backup () {
     logger "blue" "Taking old configuration backup:" "uline"
     startpath=$(pwd)
     backuptime=$(date +'%F_%H-%M-%S')
@@ -177,12 +177,12 @@ backup () {
 }
 
 # Outro
-endworld () {
+function endworld () {
     logger "green" "Done :)" "bold"
 }
 
 # Main installation
-main () {
+function main () {
     clear
     helloworld
     separator
